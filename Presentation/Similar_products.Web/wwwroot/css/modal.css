@@ -1,0 +1,134 @@
+﻿.modal {
+    display: none; /* По умолчанию скрыто */
+    position: fixed;
+    z-index: 1000; /* Высокий z-index, чтобы окно было поверх всех элементов */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.6); /* Полупрозрачный черный фон */
+    padding-top: 60px;
+    animation: fadeIn 0.3s ease; /* Плавное появление */
+}
+
+.modal-content {
+    background-color: #fff; /* Белый фон */
+    margin: auto;
+    padding: 20px;
+    border-radius: 10px; /* Закругленные углы */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Тень */
+    width: 50%; /* Ширина окна */
+    max-width: 600px; /* Максимальная ширина для больших экранов */
+    animation: slideDown 0.3s ease; /* Плавное появление сверху */
+}
+
+    /* Заголовок и текст модального окна */
+    .modal-content h3 {
+        margin-top: 0;
+        font-size: 24px;
+        color: #343a40;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .modal-content p {
+        font-size: 16px;
+        color: #6c757d;
+        text-align: center;
+        margin: 15px 0;
+    }
+
+    /* Кнопки */
+    .modal-content button {
+        margin: 10px 5px;
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+        /* Кнопка "Закрыть" */
+        .modal-content button:first-child {
+            background-color: #6c757d;
+            color: #fff;
+        }
+
+            .modal-content button:first-child:hover {
+                background-color: #5a6268;
+                transform: scale(1.05);
+            }
+
+        /* Кнопка "Удалить" */
+        .modal-content button:last-child {
+            background-color: #dc3545;
+            color: #fff;
+        }
+
+            .modal-content button:last-child:hover {
+                background-color: #c82333;
+                transform: scale(1.05);
+            }
+
+/* Кнопка закрытия окна (X) */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+    .close:hover,
+    .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+/* Анимации */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Адаптивность для модального окна */
+@media (max-width: 768px) {
+    .modal-content {
+        width: 90%;
+        padding: 15px;
+    }
+
+        .modal-content h3 {
+            font-size: 20px;
+        }
+
+        .modal-content p {
+            font-size: 14px;
+        }
+
+        .modal-content button {
+            font-size: 14px;
+            padding: 8px 15px;
+        }
+}
