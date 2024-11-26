@@ -3,10 +3,11 @@ using AutoMapper;
 using Similar_products.Application.Dtos;
 using Similar_products.Domain.Abstractions;
 using Similar_products.Application.Requests.Queries;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Similar_products.Application.RequestHandlers.QueryHandlers;
 
-public class GetEnterprisesQueryHandler : IRequestHandler<GetEnterprisesQuery, IEnumerable<EnterpriseDto>>
+public class GetEnterprisesQueryHandler : IRequestHandler<GetEnterprisesQuery, PageResult<EnterpriseDto>>
 {
 	private readonly IEnterpriseRepository _repository;
 	private readonly IMapper _mapper;
@@ -17,6 +18,13 @@ public class GetEnterprisesQueryHandler : IRequestHandler<GetEnterprisesQuery, I
 		_mapper = mapper;
 	}
 
-	public async Task<IEnumerable<EnterpriseDto>> Handle(GetEnterprisesQuery request, CancellationToken cancellationToken) => 
-		_mapper.Map<IEnumerable<EnterpriseDto>>(await _repository.Get(trackChanges: false));
+	public async Task<PageResult<EnterpriseDto>> Handle(GetEnterprisesQuery request, CancellationToken cancellationToken)
+	{
+        var totalItems = await _repository.CountAsync(request.Name);
+        var enterprises = await _repository.GetPageAsync(request.Page, request.PageSize, request.Name);
+
+        var items = _mapper.Map<IEnumerable<EnterpriseDto>>(enterprises);
+        return new PageResult<EnterpriseDto>(items, totalItems, request.Page, request.PageSize);
+    }
+
 }

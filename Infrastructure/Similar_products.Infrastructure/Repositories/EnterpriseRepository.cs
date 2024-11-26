@@ -25,5 +25,32 @@ public class EnterpriseRepository(AppDbContext dbContext) : IEnterpriseRepositor
     public void Update(Enterprise entity) => _dbContext.Enterprises.Update(entity);
 
     public async Task SaveChanges() => await _dbContext.SaveChangesAsync();
+
+
+    public async Task<IEnumerable<Enterprise>> GetPageAsync(int page, int pageSize, string? name)
+    {
+        var enterprises = await _dbContext.Enterprises.ToListAsync();
+        if (!string.IsNullOrWhiteSpace(name))
+        {
+            enterprises = enterprises.Where(p => p.Name.Contains(name, StringComparison.OrdinalIgnoreCase)).ToList();
+        }
+
+        return enterprises.Skip((page - 1) * pageSize)
+            .Take(pageSize);
+
+    }
+
+    public async Task<int> CountAsync(string? name)
+    {
+        var enterpises = await _dbContext.Enterprises.ToListAsync();
+        if (!string.IsNullOrWhiteSpace(name))
+        {
+            enterpises = enterpises.Where(p => p.Name.Contains(name, StringComparison.OrdinalIgnoreCase)).ToList();
+        }
+        return enterpises.Count;
+    }
+
+
+
 }
 

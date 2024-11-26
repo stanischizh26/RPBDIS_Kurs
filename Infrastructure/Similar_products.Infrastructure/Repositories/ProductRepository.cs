@@ -35,14 +35,7 @@ public class ProductRepository(AppDbContext dbContext) : IProductRepository
         }
 
         return products.Skip((page - 1) * pageSize)
-            .Take(pageSize)
-            .Select(product => new Product
-            {
-                Id = product.Id,
-                Name = product.Name,
-                Characteristics = product.Characteristics,
-                Photo = product.Photo,
-            }); ;
+            .Take(pageSize);
     }
 
     public async Task<int> CountAsync(string? name)

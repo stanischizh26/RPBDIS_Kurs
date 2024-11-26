@@ -8,10 +8,7 @@ public record GetProductsQuery : IRequest<PageResult<ProductDto>>
     public int Page { get; set; }
     public int PageSize { get; set; }
     public string? Name { get; set; }
-    public GetProductsQuery()
-    {
-        
-    }
+
     public GetProductsQuery(int page, int pageSize, string name)
     {
         Page = page;

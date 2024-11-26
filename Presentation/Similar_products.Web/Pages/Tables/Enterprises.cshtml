@@ -1,23 +1,23 @@
 ﻿@page
 @{
     Layout = "~/Pages/Shared/Layout.cshtml"; // Указываем путь к макету
-    ViewData["Title"] = "products List";
+    ViewData["Title"] = "enterprises List";
 }
 <link rel="stylesheet" href="~/css/model.css" asp-append-version="true" />
 <div id="filter-container">
-    <input type="text" id="filter-name" placeholder="Filter by product name"/>
+    <input type="text" id="filter-name" placeholder="Filter by enterprise name" />
     <button onclick="applyFilters()"> Apply Filters</button>
 </div>
-<div id="products-container">
+<div id="enterprises-container">
     <!-- Данные будут загружены сюда через JS -->
 </div>
-<div id="productModel" class="model">
+<div id="enterpriseModel" class="model">
     <div class="model-content">
         <!-- Здесь будет содержимое для отображения подробностей -->
     </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
-<script rel="stylesheet" src="~/js/products/edit.js" asp-append-version="true"></script>
-<script rel="stylesheet" src="~/js/products/create.js" asp-append-version="true"></script>
-<script rel="stylesheet" src="~/js/products/delete_and_info.js" asp-append-version="true"></script>
-<script rel="stylesheet" src="~/js/products/get.js" asp-append-version="true"></script>
+<script rel="stylesheet" src="~/js/enterprises/edit.js" asp-append-version="true"></script>
+<script rel="stylesheet" src="~/js/enterprises/create.js" asp-append-version="true"></script>
+<script rel="stylesheet" src="~/js/enterprises/delete_and_info.js" asp-append-version="true"></script>
+<script rel="stylesheet" src="~/js/enterprises/get.js" asp-append-version="true"></script>

@@ -4,7 +4,6 @@ using Similar_products.Web.Extensions;
 using Similar_products.Application.Requests.Queries;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
-using AutoMapper;
 
 var builder = WebApplication.CreateBuilder(args);
 

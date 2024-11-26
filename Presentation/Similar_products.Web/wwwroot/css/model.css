@@ -1,4 +1,4 @@
-﻿.modal {
+﻿.model {
     display: none; /* По умолчанию скрыто */
     position: fixed;
     z-index: 1000; /* Высокий z-index, чтобы окно было поверх всех элементов */
@@ -12,7 +12,7 @@
     animation: fadeIn 0.3s ease; /* Плавное появление */
 }
 
-.modal-content {
+.model-content {
     background-color: #fff; /* Белый фон */
     margin: auto;
     padding: 20px;
@@ -24,7 +24,7 @@
 }
 
     /* Заголовок и текст модального окна */
-    .modal-content h3 {
+    .model-content h3 {
         margin-top: 0;
         font-size: 24px;
         color: #343a40;
@@ -32,7 +32,7 @@
         text-align: center;
     }
 
-    .modal-content p {
+    .model-content p {
         font-size: 16px;
         color: #6c757d;
         text-align: center;
@@ -40,7 +40,7 @@
     }
 
     /* Кнопки */
-    .modal-content button {
+    .model-content button {
         margin: 10px 5px;
         padding: 10px 20px;
         font-size: 16px;
@@ -52,23 +52,23 @@
     }
 
         /* Кнопка "Закрыть" */
-        .modal-content button:first-child {
+        .model-content button:first-child {
             background-color: #6c757d;
             color: #fff;
         }
 
-            .modal-content button:first-child:hover {
+            .model-content button:first-child:hover {
                 background-color: #5a6268;
                 transform: scale(1.05);
             }
 
         /* Кнопка "Удалить" */
-        .modal-content button:last-child {
+        .model-content button:last-child {
             background-color: #dc3545;
             color: #fff;
         }
 
-            .modal-content button:last-child:hover {
+            .model-content button:last-child:hover {
                 background-color: #c82333;
                 transform: scale(1.05);
             }
@@ -114,20 +114,20 @@
 
 /* Адаптивность для модального окна */
 @media (max-width: 768px) {
-    .modal-content {
+    .model-content {
         width: 90%;
         padding: 15px;
     }
 
-        .modal-content h3 {
+        .model-content h3 {
             font-size: 20px;
         }
 
-        .modal-content p {
+        .model-content p {
             font-size: 14px;
         }
 
-        .modal-content button {
+        .model-content button {
             font-size: 14px;
             padding: 8px 15px;
         }

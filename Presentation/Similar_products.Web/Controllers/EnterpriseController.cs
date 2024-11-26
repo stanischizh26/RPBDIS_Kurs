@@ -3,6 +3,7 @@
 using Similar_products.Application.Dtos;
 using Similar_products.Application.Requests.Queries;
 using Similar_products.Application.Requests.Commands;
+using Bogus.DataSets;
 
 namespace Similar_products.Web.Controllers;
 
@@ -18,9 +19,9 @@ public class EnterpriseController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> Get()
+    public async Task<IActionResult> Get([FromQuery] int page = 1, [FromQuery] int pageSize = 10, [FromQuery] string? name = null)
     {
-        var enterprises = await _mediator.Send(new GetEnterprisesQuery());
+        var enterprises = await _mediator.Send(new GetEnterprisesQuery(page, pageSize, name));
 
         return Ok(enterprises);
     }

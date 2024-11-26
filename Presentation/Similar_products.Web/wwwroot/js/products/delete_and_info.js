@@ -2,20 +2,20 @@
     const row = deleteButton.closest('tr');
     const id = row.dataset.id;
 
-    const modal = document.getElementById("productModal");
-    const modalContent = modal.querySelector(".modal-content");
+    const model = document.getElementById("productModel");
+    const modelContent = model.querySelector(".model-content");
 
-    modalContent.innerHTML = `
+    modelContent.innerHTML = `
         <h3>Are you sure you want to delete the product?</h3>
         <p><strong>Product Name:</strong> ${row.cells[0].innerText}</p>
         <p><strong>Characteristics:</strong> ${row.cells[1].innerText}</p>
         <p><strong>Unit:</strong> ${row.cells[2].innerText}</p>
         <p><strong>Photo:</strong> ${row.cells[3].innerText}</p>
-        <button onclick="closeModalProduct()">Close</button>
+        <button onclick="closeModelProduct()">Close</button>
         <button onclick="deleteProduct('${id}')">Delete</button>
     `;
 
-    modal.style.display = "block";
+    model.style.display = "block";
 }
 
 async function deleteProduct(id) {
@@ -40,11 +40,11 @@ async function deleteProduct(id) {
     }
 
     // Закрываем модальное окно после удаления
-    const modal = document.getElementById("productModal");
-    modal.style.display = "none";
+    const model = document.getElementById("productModel");
+    model.style.display = "none";
 }
 
-function closeModalProduct() {
-    const modal = document.getElementById("productModal");
-    modal.style.display = "none";
+function closeModelProduct() {
+    const model = document.getElementById("productModel");
+    model.style.display = "none";
 }
