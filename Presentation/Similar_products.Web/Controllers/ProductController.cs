@@ -3,10 +3,12 @@
 using Similar_products.Application.Dtos;
 using Similar_products.Application.Requests.Queries;
 using Similar_products.Application.Requests.Commands;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Similar_products.Web.Controllers;
 
 [Route("api/products")]
+[Authorize]
 [ApiController]
 public class ProductController : ControllerBase
 {
@@ -45,6 +47,7 @@ public class ProductController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Roles = "admin")]
     public async Task<IActionResult> Create([FromBody] ProductForCreationDto? product)
     {
         if (product is null)
@@ -58,7 +61,7 @@ public class ProductController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> Update(Guid id, [FromBody] ProductForUpdateDto? product)
+    public async Task<IActionResult> Update(Guid id, [FromBody]/*[Bind("Id,Name,Characteristics,Unit,Photo")]*/ ProductForUpdateDto? product)
     {
         if (product is null)
         {

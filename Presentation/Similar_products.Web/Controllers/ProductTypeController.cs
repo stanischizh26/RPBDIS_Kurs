@@ -3,10 +3,12 @@
 using Similar_products.Application.Dtos;
 using Similar_products.Application.Requests.Queries;
 using Similar_products.Application.Requests.Commands;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Similar_products.Web.Controllers;
 
 [Route("api/productTypes")]
+[Authorize]
 [ApiController]
 public class ProductTypeController : ControllerBase
 {
@@ -39,6 +41,7 @@ public class ProductTypeController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Roles = "admin")]
     public async Task<IActionResult> Create([FromBody] ProductTypeForCreationDto? productType)
     {
         if (productType is null)

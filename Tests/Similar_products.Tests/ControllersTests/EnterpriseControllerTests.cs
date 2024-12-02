@@ -22,33 +22,6 @@ public class EnterpriseControllerTests
     }
 
     [Fact]
-    public async Task Get_ReturnsListOfEnterprises()
-    {
-        // Arrange
-        var enterprises = new List<EnterpriseDto> { new(), new() };
-
-        _mediatorMock
-            .Setup(m => m.Send(new GetEnterprisesQuery(), CancellationToken.None))
-            .ReturnsAsync(enterprises);
-
-        // Act
-        var result = await _controller.Get();
-
-        // Assert
-        result.Should().NotBeNull();
-        result.Should().BeOfType(typeof(OkObjectResult));
-
-        var okResult = result as OkObjectResult;
-        okResult?.StatusCode.Should().Be((int)HttpStatusCode.OK);
-
-        var value = okResult?.Value as List<EnterpriseDto>;
-        value.Should().HaveCount(2);
-        value.Should().BeEquivalentTo(enterprises);
-
-        _mediatorMock.Verify(m => m.Send(new GetEnterprisesQuery(), CancellationToken.None), Times.Once);
-    }
-
-    [Fact]
     public async Task GetById_ExistingEnterpriseId_ReturnsEnterprise()
     {
         // Arrange

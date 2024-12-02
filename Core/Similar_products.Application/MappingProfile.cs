@@ -27,6 +27,10 @@ public class MappingProfile : Profile
 		CreateMap<SalesPlan, SalesPlanDto>();
 		CreateMap<SalesPlanForCreationDto, SalesPlan>();
 		CreateMap<SalesPlanForUpdateDto, SalesPlan>();
+
+        CreateMap<User, UserDto>();
+        CreateMap<UserForCreationDto, User>();
+        CreateMap<UserForUpdateDto, User>();
     }
 }
 

@@ -4,10 +4,12 @@ using Similar_products.Application.Dtos;
 using Similar_products.Application.Requests.Queries;
 using Similar_products.Application.Requests.Commands;
 using Bogus.DataSets;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Similar_products.Web.Controllers;
 
 [Route("api/enterprises")]
+[Authorize]
 [ApiController]
 public class EnterpriseController : ControllerBase
 {
@@ -40,6 +42,7 @@ public class EnterpriseController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Roles = "admin")]
     public async Task<IActionResult> Create([FromBody] EnterpriseForCreationDto? enterprise)
     {
         if (enterprise is null)

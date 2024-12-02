@@ -30,5 +30,6 @@ public static class ServiceExtensions
 		services.AddScoped<IProductionPlanRepository, ProductionPlanRepository>();
 		services.AddScoped<IProductTypeRepository, ProductTypeRepository>();
 		services.AddScoped<ISalesPlanRepository, SalesPlanRepository>();
+        services.AddScoped<IUserRepository, UserRepository>();
     }
 }

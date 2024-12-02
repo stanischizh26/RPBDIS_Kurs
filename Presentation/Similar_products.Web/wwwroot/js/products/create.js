@@ -1,20 +1,20 @@
-﻿function addEmptyRowProduct() {
-    const table = document.querySelector("#products-container table tbody");
+﻿function addEmptyRow() {
+    const table = document.querySelector("#table-container table tbody");
 
     // Создаём новую строку
     const newRow = document.createElement("tr");
     newRow.dataset.id = "new"; // Временный ID для новой строки
 
     newRow.innerHTML = `
-        <td style="padding: 8px;" contenteditable="true"></td> <!-- Name -->
-        <td style="padding: 8px;" contenteditable="true"></td> <!-- Characteristics -->
-        <td style="padding: 8px;" contenteditable="true"></td> <!-- Unit -->
-        <td style="padding: 8px;" contenteditable="true"></td> <!-- Photo -->
+        <td style="padding: 8px;" contenteditable="true"></td>
+        <td style="padding: 8px;" contenteditable="true"></td>
+        <td style="padding: 8px;" contenteditable="true"></td>
+        <td style="padding: 8px;" contenteditable="true"></td>
         <td style="padding: 8px;">
-            <a href="javascript:void(0);" onclick="saveNewRowProduct(this)" title="Save">
+            <a href="javascript:void(0);" onclick="saveNewRow(this)" title="Save">
                 <i class="bi bi-check-circle-fill"></i>
             </a>
-            <a href="javascript:void(0);" onclick="cancelNewRowProduct(this)" title="Cancel">
+            <a href="javascript:void(0);" onclick="cancelNewRow(this)" title="Cancel">
                 <i class="bi bi-x-circle-fill"></i>
             </a>
         </td>
@@ -23,31 +23,33 @@
     // Вставляем новую строку в начало таблицы
     table.prepend(newRow);
 }
-
-async function saveNewRowProduct(saveButton) {
+async function saveNewRow(saveButton) {
     const row = saveButton.closest("tr");
     const cells = row.querySelectorAll("td[contenteditable]");
 
-    // Собираем данные из строки
     const newProduct = {
         name: cells[0].innerText.trim(),
         characteristics: cells[1].innerText.trim(),
         unit: cells[2].innerText.trim(),
-        photo: cells[3].innerText.trim()
-    };
+        photo: cells[3].innerText.trim(),
+    }; 
 
-    // Проверяем заполненность полей
-    if (!newProduct.name || !newProduct.characteristics || !newProduct.unit) {
-        alert("All fields (Name, Characteristics, Unit) must be filled.");
+    // Проверяем заполненность поля
+    if (!newProduct.name && !newProduct.characteristics && !newProduct.unit) {
+        alert("Не все поля заполнены");
         return;
     }
 
     try {
         // Отправляем данные на сервер
-        const response = await axios.post(apiBaseUrl, newProduct);
+        const response = await axios.post(apiBaseUrl, newProduct, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token') }`,
+            },
+        });
 
         if (response.status === 201) {
-            alert("Product created successfully!");
+            alert("Данные созданы успешно!");
 
             // Обновляем строку с новыми данными
             row.dataset.id = response.data.id; // Устанавливаем ID, полученный от сервера
@@ -57,11 +59,11 @@ async function saveNewRowProduct(saveButton) {
                 <td style="padding: 8px;" contenteditable="false">${response.data.unit}</td>
                 <td style="padding: 8px;" contenteditable="false">${response.data.photo}</td>
                 <td style="padding: 8px;">
-                    <a href="javascript:void(0);" onclick="editRowProduct(this)" title="Edit">
+                    <a href="javascript:void(0);" onclick="editRow(this)" title="Edit">
                         <i class="bi bi-pencil-fill"></i>
                     </a>
-                    <a href="javascript:void(0);" onclick="delete_and_infoProduct(this)" title="Delete Item">
-                        <i class="bi bi-trash-fill"></i>
+                    <a href="javascript:void(0);" onclick="info(this)" title="Delete Item">
+                        <i class="bi bi-eye-fill"></i>
                     </a>
                 </td>
             `;
@@ -77,7 +79,7 @@ async function saveNewRowProduct(saveButton) {
     }
 }
 
-function cancelNewRowProduct(cancelButton) {
+function cancelNewRow(cancelButton) {
     const row = cancelButton.closest("tr");
     row.remove(); // Удаляем строку
 }

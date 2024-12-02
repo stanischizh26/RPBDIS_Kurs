@@ -17,7 +17,36 @@ public class DatabaseSeeder
     {
         // Автоматически применяем миграции
         _context.Database.EnsureCreated();
+        if (!_context.Users.Any())
+        {
+            // Создаём объект пользователя
+            var admin = new User
+            {
+                UserName = "admin",
+                FullName = "admin",
+                HashedPassword = BCrypt.Net.BCrypt.HashPassword("admin"),
+                Role = "admin"
+            };
+            await _context.Users.AddAsync(admin);
 
+            List<User> users = new List<User>();
+            for (int i = 0; i < 100; i++)
+            {
+                var hashedPassword = BCrypt.Net.BCrypt.HashPassword("user_" + i);
+                // Создаём объект пользователя
+                var user = new User
+                {
+                    UserName = "user_" + i,
+                    FullName = "user_" + i,
+                    HashedPassword = hashedPassword,
+                    Role = "user"
+                };
+                users.Add(user);
+            }
+            await _context.Users.AddRangeAsync(users);
+
+            await _context.SaveChangesAsync();
+        }
         Random rand = new(0);
         // Если таблица пустая то ее заполнить
         if (!_context.Products.Any())
